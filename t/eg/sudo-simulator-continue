@@ -1,0 +1,24 @@
+#!/usr/local/bin/perl -w
+###########################################
+# sudo-simulator simulator
+###########################################
+use strict;
+use Term::ReadKey;
+
+$|=1;
+print "$0\n";
+
+for(1..2) {
+
+    my $user = scalar getpwuid $>;
+    print "[sudo] password for $user:";
+    
+    ReadMode 2;
+    my $pw1 = <STDIN>;
+    ReadMode 1;
+    
+    print "Got it ($_).\n";
+
+    print "False alarm: The [sudo] password for $user: bait\n";
+    print "And some more output\n";
+}
