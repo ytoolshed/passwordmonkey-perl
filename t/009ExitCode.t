@@ -29,7 +29,7 @@ $monkey->filler_add( $sudo );
 $monkey->spawn("ls /does/not/exist/anywhere");
 $monkey->go();
 my $rc = ($monkey->exit_status() >> 8);
-is( $rc, 2, "failed ls rc" );
+isnt( $rc, 0, "failed ls rc" );
 
 $monkey = PasswordMonkey->new();
 $monkey->{expect}->log_user( 0 );
