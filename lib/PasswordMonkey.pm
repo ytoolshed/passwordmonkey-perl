@@ -7,7 +7,7 @@ use Expect qw(exp_continue);
 use Log::Log4perl qw(:easy);
 use Module::Pluggable require => 1;
 
-our $VERSION = "0.04";
+our $VERSION = "0.06";
 our $PACKAGE = __PACKAGE__;
 
 our $PASSWORD_MONKEY_OK      = 1;

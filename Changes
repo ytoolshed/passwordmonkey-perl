@@ -1,6 +1,9 @@
 ######################################################################
 Revision history for Perl extension PasswordMonkey
 
+0.06  2011/08/03
+    (ms) Public release to Github
+
 0.05  2011/06/30
     (ms) exit_status on a dealbreaker needs to be $rc >> 8 to comply with
          Expect's system()-like expectations.
