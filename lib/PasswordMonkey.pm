@@ -206,6 +206,8 @@ PasswordMonkey - Password prompt responder
 =head1 SYNOPSIS
 
     use PasswordMonkey;
+    use PasswordMonkey::Filler::Sudo;
+    use PasswordMonkey::Filler::Adduser;
 
     my $sudo = PasswordMonkey::Filler::Sudo->new(
         password => "supersecrEt",
