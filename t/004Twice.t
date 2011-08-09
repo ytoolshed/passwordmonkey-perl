@@ -29,7 +29,7 @@ $monkey->{expect}->log_user( 0 );
 
 $monkey->filler_add( $sudo );
 
-$monkey->spawn("$eg_dir/sudo-simulator-twice");
+$monkey->spawn("$^X $eg_dir/sudo-simulator-twice");
 
 my $rc = $monkey->go();
 
@@ -48,7 +48,7 @@ my $waiter = PasswordMonkey::Bouncer::Wait->new(
 
 $sudo->bouncer_add( $waiter );
 
-$monkey->spawn("$eg_dir/sudo-simulator-twice");
+$monkey->spawn("$^X $eg_dir/sudo-simulator-twice");
 
 $rc = $monkey->go();
 is $rc, 1, "succeeded";
@@ -59,8 +59,8 @@ like $monkey->{expect_return}->{before_match}, qr/Got it \(2\)/,
 
 my $r = $monkey->{filler_report};
 
-is $r->[0]->[0], '[sudo] password for mschilli:', "report ok";
-is $r->[1]->[0], '[sudo] password for mschilli:', "report ok";
+is $r->[0]->[0], '[sudo] password for womper:', "report ok";
+is $r->[1]->[0], '[sudo] password for womper:', "report ok";
 
 is $r->[0]->[1], 'supersecrEt', "report ok";
 is $r->[1]->[1], 'supersecrEt', "report ok";
@@ -77,7 +77,7 @@ $waiter = PasswordMonkey::Bouncer::Wait->new(
 
 $sudo->bouncer_add( $waiter );
 
-$monkey->spawn("$eg_dir/sudo-simulator-continue");
+$monkey->spawn("$^X $eg_dir/sudo-simulator-continue");
 
 $rc = $monkey->go();
 is($rc, 1, "succeeded");
@@ -85,8 +85,8 @@ is $monkey->fills(), 2, "2 fills";
 
 $r = $monkey->{filler_report};
 
-is $r->[0]->[0], '[sudo] password for mschilli:', "report ok";
-is $r->[1]->[0], '[sudo] password for mschilli:', "report ok";
+is $r->[0]->[0], '[sudo] password for womper:', "report ok";
+is $r->[1]->[0], '[sudo] password for womper:', "report ok";
 
 is $r->[0]->[1], 'supersecrEt', "report ok";
 is $r->[1]->[1], 'supersecrEt', "report ok";

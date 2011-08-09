@@ -19,6 +19,7 @@ t/007Dealbreaker.t
 t/008Coderef.t
 t/009ExitCode.t
 t/eg/adduser-simulator
+t/eg/ex0
 t/eg/ex69
 t/eg/sudo-simulator
 t/eg/sudo-simulator-continue

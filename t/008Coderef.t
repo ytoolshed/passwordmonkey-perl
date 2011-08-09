@@ -28,7 +28,7 @@ $monkey->{expect}->log_user( 0 );
 
 $monkey->filler_add( $sudo );
 
-$monkey->spawn("$eg_dir/sudo-simulator-with-echo");
+$monkey->spawn("$^X $eg_dir/sudo-simulator-with-echo");
 
 $monkey->go();
 

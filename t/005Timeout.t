@@ -22,7 +22,7 @@ plan tests => 2;
 my $monkey = PasswordMonkey->new( timeout => 1 );
 $monkey->expect->log_user( 0 );
 
-$monkey->spawn("$eg_dir/timeout");
+$monkey->spawn("$^X $eg_dir/timeout");
 $monkey->go();
 
 ok $monkey->timed_out, "monkey timed out";

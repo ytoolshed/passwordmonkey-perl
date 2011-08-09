@@ -40,7 +40,7 @@ $monkey->{expect}->log_user( 0 );
 
 $monkey->filler_add( $sudo );
 
-$monkey->spawn("$eg_dir/sudo-simulator-fake echo foo");
+$monkey->spawn("$^X $eg_dir/sudo-simulator-fake echo foo");
 
 my $rc = $monkey->go();
 

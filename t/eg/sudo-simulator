@@ -8,7 +8,7 @@ use Term::ReadKey;
 $|=1;
 print "$0\n";
 
-my $user = scalar getpwuid $>;
+my $user = "womper";
 print "[sudo] password for $user:";
 
 ReadMode 2;

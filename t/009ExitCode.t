@@ -26,23 +26,23 @@ my $sudo = PasswordMonkey::Filler::Sudo->new(
 my $monkey = PasswordMonkey->new();
 $monkey->{expect}->log_user( 0 );
 $monkey->filler_add( $sudo );
-$monkey->spawn("ls /does/not/exist/anywhere");
+$monkey->spawn("$^X /does/not/exist/anywhere");
 $monkey->go();
 my $rc = ($monkey->exit_status() >> 8);
-isnt( $rc, 0, "failed ls rc" );
+isnt( $rc, 0, "failed perl script" );
 
 $monkey = PasswordMonkey->new();
 $monkey->{expect}->log_user( 0 );
 $monkey->filler_add( $sudo );
-$monkey->spawn("ls /");
+$monkey->spawn("$^X $Bin/eg/ex0");
 $monkey->go();
 $rc = ($monkey->exit_status() >> 8);
-is( $rc, 0, "ok ls rc" );
+is( $rc, 0, "ok perl rc" );
 
 $monkey = PasswordMonkey->new();
 $monkey->{expect}->log_user( 0 );
 $monkey->filler_add( $sudo );
-$monkey->spawn("$Bin/eg/ex69");
+$monkey->spawn("$^X $Bin/eg/ex69");
 $monkey->go();
 $rc = ($monkey->exit_status() >> 8);
 is( $rc, 69, "exit code 69" );

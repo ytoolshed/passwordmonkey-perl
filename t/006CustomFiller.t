@@ -59,7 +59,7 @@ $monkey->expect->log_user( 0 );
 
 $monkey->filler_add( $custom );
 
-$monkey->spawn("$eg_dir/type-here");
+$monkey->spawn("$^X $eg_dir/type-here");
 
 my $rc = $monkey->go();
 
