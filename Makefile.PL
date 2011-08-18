@@ -21,6 +21,7 @@ WriteMakefile(
         Module::Pluggable => 3.9,
         IO::Pty           => 1.09,
         Term::ReadLine    => 1.01,
+        Term::ReadKey     => 2.30,
     }, # e.g., Module::Name => 1.1
     $ExtUtils::MakeMaker::VERSION >= 6.50 ? (%$meta_merge) : (),
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
