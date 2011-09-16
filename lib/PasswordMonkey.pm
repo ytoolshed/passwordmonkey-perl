@@ -217,7 +217,9 @@ PasswordMonkey - Password prompt responder
         password => "logmein",
     );
 
-    my $monkey = PasswordMonkey->new();
+    my $monkey = PasswordMonkey->new(
+        timeout => 60,
+    );
 
     $monkey->filler_add( $sudo );
     $monkey->filler_add( $adduser );
@@ -258,6 +260,22 @@ module uses plain text passwords and it's useful in a context with legacy
 applications, because it provides a slightly better and safer mechanism 
 than simpler Expect-based scripts, but it is still worse than using 
 passwordless technologies. You've been warned.
+
+=head1 Options
+
+=over 4
+
+=item C<timeout>
+
+The constructor accepts a timeout value (defaults to 60 seconds), 
+after which it will stop listening for passwords and terminate the
+go() call with a 'timed_out' message:
+
+    my $monkey = PasswordMonkey->new(
+        timeout => 60,
+    );
+
+=back
 
 =head1 Return Codes
 
