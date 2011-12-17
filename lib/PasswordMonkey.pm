@@ -294,13 +294,31 @@ with writing your own custom filler plugins. The API is very simple,
 a new filler plugin is just a matter of 10 lines of code. 
 Writing your own custom filler plugins allows you mix and match those
 plugins later and share them with other users on CPAN (think
-C<PasswordMonkey::Filler::MysqlClient>, 
+C<PasswordMonkey::Filler::MysqlClient> or 
+C<PasswordMonkey::Filler::SSH>).
 
-Filler plugins
+To create a filler plugin object, call its constructor:
 
     my $sudo = PasswordMonkey::Filler::Sudo->new(
         password => "supersecrEt",
     );
+
+and then add it to the monkey:
+
+    $monkey->filler_add( $sudo );
+
+and when you say 
+
+    $monkey->spawn( "sudo ls" );
+    $monkey->go();
+
+later, the monkey fill in the "supersecrEt" password every time the
+spawned program asks for something like
+
+    [sudo] password for joe:
+    
+As mentioned above, writing a filler plugin is easy, here is the 
+entire PasswordMonkey::Filler::Sudo implementation:
 
     package PasswordMonkey::Filler::Sudo;
     use strict;
@@ -315,8 +333,21 @@ Filler plugins
 
     1;
 
-, preloaded with passwords and the prompts those passwords
-are to be released at.
+All that's required from the plugin 
+is a C<prompt()> method that returns a regular 
+expression that matches the prompts the filler plugin is supposed
+to respond to. You don't need to deal with collecting the
+password, because it gets passed to the filler plugin 
+constructor, which is taken care of by the base class 
+C<PasswordMonkey::Filler>. Note that C<PasswordMonkey::Filler::Sudo> 
+inherits from C<PasswordMonkey::Filler> with the 
+C<use base> directive, as shown in the code snippet above.
+
+=item C<go()>
+
+Starts the monkey, which will respond to password prompts according
+to the filler plugins that have been loaded, until it times out or
+the spawned program exits.
 
 =back
 
