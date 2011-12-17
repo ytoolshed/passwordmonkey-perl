@@ -60,7 +60,7 @@ PasswordMonkey::Bouncer::Wait - Bouncer waiting n secs verifying inactiviy
 
 =head1 SYNOPSIS
 
-    use PasswordMonkey::Bouncer::Wait
+    use PasswordMonkey::Bouncer::Wait;
 
     my $waiter = PasswordMonkey::Bouncer::Wait->new( seconds => 2 );
 
