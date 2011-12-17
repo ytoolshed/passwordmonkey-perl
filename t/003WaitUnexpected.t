@@ -18,6 +18,9 @@ use Data::Dumper;
   # debug on
 # $Expect::Exp_Internal = 1;
 
+  # suppress warnings because bouncer's gonna warn
+local $SIG{__WARN__}=sub{};
+
 my $eg_dir = "$Bin/eg";
 
 plan tests => 3;

@@ -39,7 +39,7 @@ sub check {
     );
 
     if( $self->{got_output} ) {
-        ERROR "Whoa, ", __PACKAGE__, " received unexpected output ",
+        LOGWARN "Whoa, ", __PACKAGE__, " received unexpected output ",
         " ('", $self->{expect}->match(), "') within ",
         "$self->{seconds} secs moratorium. Won't send anything over.";
         return 0;

@@ -18,6 +18,9 @@ use Log::Log4perl qw(:easy);
 
 my $eg_dir = "$Bin/eg";
 
+  # suppress warnings because bouncer's gonna warn
+local $SIG{__WARN__}=sub{};
+
 plan tests => 15;
 
 my $sudo = PasswordMonkey::Filler::Sudo->new(
