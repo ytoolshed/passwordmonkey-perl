@@ -68,11 +68,36 @@ sub fill {
       # To be sure the password doesn't end up in the output if 
       # the collecting program forgot to turn echoing off (or we fell
       # for something that looked like a password prompt but the 
-      # driven program isn't collecting at all), turn echoing off 
-      # on the pty manually.
-    $exp->slave->stty(qw(-echo));
+      # driven program isn't collecting at all), check first and if 
+      # echo is on, turn it off on the pty slave manually.
+    my $stty_settings = $exp->slave->stty("-a");
+
+    my $echo_is_on = 1;
+    if( $stty_settings =~ /\b-echo\b/ ) {
+        $echo_is_on = 0;
+    }
+
+    if( $echo_is_on ) {
+        ERROR "Whoa there! Echo on pty slave is on. ",
+              "Turning it off before sending password.";
+        $exp->slave->stty(qw(-echo));
+    }
 
     $exp->send( $password, "\n" );
+
+
+    if( $echo_is_on ) {
+        ERROR "Restoring echo on slave pty.";
+
+          # Just sending over 'echo' here seems to be too early to suppress
+          # echoing the password we just sent. Seems like another '-echo' 
+          # followed by 'echo' does the trick. Ugh.
+        $exp->slave->stty(qw(-echo));
+
+        $exp->slave->stty(qw(echo));
+    }
+
+    1;
 }
 
 ###########################################

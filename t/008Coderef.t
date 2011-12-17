@@ -32,4 +32,4 @@ $monkey->spawn("$^X $eg_dir/sudo-simulator-with-echo");
 
 $monkey->go();
 
-like( $monkey->expect()->before(), qr/supersecrEt/, "echoed password" );
+unlike( $monkey->expect()->before(), qr/supersecrEt/, "safeguard for echo-on" );
