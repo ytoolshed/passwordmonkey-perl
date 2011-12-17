@@ -261,19 +261,62 @@ applications, because it provides a slightly better and safer mechanism
 than simpler Expect-based scripts, but it is still worse than using 
 passwordless technologies. You've been warned.
 
-=head1 Options
+=head1 Methods
 
 =over 4
 
-=item C<timeout>
+=item C<new()>
 
-The constructor accepts a timeout value (defaults to 60 seconds), 
+Creates a new PasswordMonkey object. Imagine this as a trained monkey
+who knows to type a password when prompt shows up on a terminal.
+
+Optionally,
+the constructor accepts a C<timeout> value (defaults to 60 seconds), 
 after which it will stop listening for passwords and terminate the
 go() call with a 'timed_out' message:
 
     my $monkey = PasswordMonkey->new(
         timeout => 60,
     );
+
+=item C<filler_add( $filler )>
+
+Add a filler plugin to the monkey. A filler plugin is a module that
+defines which password to type on a given prompt: "If you see
+'Password:', then type 'supersecrEt' with a newline". 
+There are a number of sample plugins provided with the PasswordMonkey core 
+distribution, namely C<PasswordMonkey::Filler::Sudo> (respond to sudo 
+prompts with a given password) and C<PasswordMonkey::Filler::AddUser>
+(respond to C<adduser>'s password prompts to change a user's password.
+
+But these are just examples, the real power of PasswordMonkey comes
+with writing your own custom filler plugins. The API is very simple,
+a new filler plugin is just a matter of 10 lines of code. 
+Writing your own custom filler plugins allows you mix and match those
+plugins later and share them with other users on CPAN (think
+C<PasswordMonkey::Filler::MysqlClient>, 
+
+Filler plugins
+
+    my $sudo = PasswordMonkey::Filler::Sudo->new(
+        password => "supersecrEt",
+    );
+
+    package PasswordMonkey::Filler::Sudo;
+    use strict;
+    use warnings;
+    use base qw(PasswordMonkey::Filler);
+
+    sub prompt {
+        my($self) = @_;
+
+        return qr(\[sudo\] password for [\w_]+:);
+    }
+
+    1;
+
+, preloaded with passwords and the prompts those passwords
+are to be released at.
 
 =back
 
