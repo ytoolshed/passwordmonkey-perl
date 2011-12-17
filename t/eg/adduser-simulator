@@ -22,6 +22,10 @@ ReadMode 1;
 
 print "\n";
 
+if( $pw1 !~ /\S/ ) {
+    die "Empty password";
+}
+
 if( $pw1 ne $pw2 ) {
     die "Passwords didn't match\n";
 }

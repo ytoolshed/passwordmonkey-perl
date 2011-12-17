@@ -5,6 +5,7 @@ TODO: Add Bouncer::NoEcho and Bouncer::Retry implementations
 TODO: If a bouncer fails, provide means to continue the program
 TODO: Bouncer failures should be visible in output, right now
       it's just hanging on a prompt if logging is turned off.
+TODO: Document dealbreaker
 
 0.09  2011/12/17
     (ms) Added documentation of timeout parameter
