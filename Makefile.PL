@@ -17,6 +17,7 @@ WriteMakefile(
     'VERSION_FROM' => 'lib/PasswordMonkey.pm', # finds $VERSION
     'PREREQ_PM'    => {
         Expect            => 1.21,
+        IO::Stty          => 0.03,
         Log::Log4perl     => 1.00,
         Module::Pluggable => 3.9,
         IO::Pty           => 1.09,
