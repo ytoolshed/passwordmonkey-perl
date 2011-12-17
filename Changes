@@ -8,10 +8,11 @@ TODO: Bouncer failures should be visible in output, right now
 TODO: Document dealbreaker
 
 0.09  2011/12/17
-    (ms) Added documentation of timeout parameter
+    (ms) Lots of better documentation
     (ms) Calling -noecho right before submitting the password to make
          sure the password isn't echoed even if the collecting program
          forgot to turn echoing off.
+    (ms) PasswordMonkey::Filler::Password plugin and tests
 
 0.08  2011/08/17
     (ms) Added missing Term::ReadKey for testsuite
