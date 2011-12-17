@@ -343,15 +343,16 @@ C<PasswordMonkey::Filler>. Note that C<PasswordMonkey::Filler::Sudo>
 inherits from C<PasswordMonkey::Filler> with the 
 C<use base> directive, as shown in the code snippet above.
 
+=item C<spawn( $command )>
+
+Spawn an external command (e.g. "sudo ls") to whose password prompts
+the monkey will keep responding later.
+
 =item C<go()>
 
 Starts the monkey, which will respond to password prompts according
 to the filler plugins that have been loaded, until it times out or
 the spawned program exits.
-
-=back
-
-=head1 Return Codes
 
 The $monkey->go() method call returns a true value upon success, so running
 
@@ -359,30 +360,51 @@ The $monkey->go() method call returns a true value upon success, so running
         print "Something went wrong!\n";
     }
 
-will catch any errors. Also, 
+will catch any errors.
+
+=item C<is_success()
+
+After go() has returned,
 
     $monkey->is_success();
 
-will return true on success. Note that hitting a timeout or a bad exit
+will return true if the spawned program exited with a success
+return code. Note that hitting a timeout or a bad exit
 status of the spawned process is considered an error. To check for these
-cases, use the following accessors:
+cases, use the C<exit_status()> and C<timed_out()> accessors.
+
+=item C<exit_status()>
+
+After C<go()> has returned, obtain the exit code of spawned process:
 
     if( $monkey->exit_status() ) {
         print "The process exited with rc=", $monkey->exit_status(), "\n";
     }
 
-    if( $monkey->timed_out() ) {
-        print "The monkey timed out!\n";
-    }
-
-To get the number of password fills the monkey performed, use
-
-    my $nof_fills = $monkey->fills();
-
 Note that C<exit_status()> returns the Perl-specific return code of
 C<system()>. If you need the shell-specific return code, you need to
 use C<exit_status() E<gt>E<gt> 8> instead 
 (check 'perldoc -f system' for details).
+
+=item C<timed_out()>
+
+After C<go()> has returned, check if the monkey timed out or terminated
+because the spawned process exited:
+
+    if( $monkey->timed_out() ) {
+        print "The monkey timed out!\n";
+    } else {
+        print "The spawned process has exited!\n";
+    }
+
+=item C<fills()>
+
+After C<go()> has returned, get the number of password fills the 
+monkey performed:
+
+    my $nof_fills = $monkey->fills();
+
+=back
 
 =head1 Fillers
 
