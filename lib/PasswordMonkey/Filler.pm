@@ -90,9 +90,19 @@ sub fill {
         ERROR "Restoring echo on slave pty.";
 
           # Just sending over 'echo' here seems to be too early to suppress
-          # echoing the password we just sent. Seems like another '-echo' 
-          # followed by 'echo' does the trick. Ugh.
-        $exp->slave->stty(qw(-echo));
+          # echoing the password we just sent. 
+          # 
+          # Worse, there doesn't seem to be a reliabe way to wait until the
+          # Pty slave won't echo the password we just sent if we turn on
+          # its echo. I've tried sending another '-echo', sending a '-a'
+          # to retrieve status, but none of them makes sure the Pty slave
+          # will have flushed the data and they're failing in unpredictable
+          # ways based on race conditions.
+          # 
+          # This is horrible, but I got best results by sleeping a second 
+          # before turning the echo back on, so that's what we're stuck
+          # with right now. What a mess.
+        sleep 1;
 
         $exp->slave->stty(qw(echo));
     }
