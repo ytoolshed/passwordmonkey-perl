@@ -65,6 +65,13 @@ sub fill {
         $password = $password->();
     }
 
+      # To be sure the password doesn't end up in the output if 
+      # the collecting program forgot to turn echoing off (or we fell
+      # for something that looked like a password prompt but the 
+      # driven program isn't collecting at all), turn echoing off 
+      # on the pty manually.
+    $exp->slave->stty(qw(-echo));
+
     $exp->send( $password, "\n" );
 }
 

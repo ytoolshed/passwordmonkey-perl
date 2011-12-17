@@ -1,8 +1,13 @@
 ######################################################################
 Revision history for Perl extension PasswordMonkey
 
+TODO: Add Bouncer::NoEcho and Bouncer::Retry implementations
+
 0.09  (not yet released)
     (ms) Added documentation of timeout parameter
+    (ms) Calling -noecho right before submitting the password to make
+         sure the password isn't echoed even if the collecting program
+         forgot to turn echoing off.
 
 0.08  2011/08/17
     (ms) Added missing Term::ReadKey for testsuite
