@@ -286,7 +286,7 @@ defines which password to type on a given prompt: "If you see
 'Password:', then type 'supersecrEt' with a newline". 
 There are a number of sample plugins provided with the PasswordMonkey core 
 distribution, namely C<PasswordMonkey::Filler::Sudo> (respond to sudo 
-prompts with a given password) and C<PasswordMonkey::Filler::AddUser>
+prompts with a given password) and C<PasswordMonkey::Filler::Password>
 (respond to C<adduser>'s password prompts to change a user's password.
 
 But these are just examples, the real power of PasswordMonkey comes
@@ -408,33 +408,44 @@ monkey performed:
 
 =head1 Fillers
 
+The following fillers come bundled with the PasswordMonkey distribution,
+but they're included only as fully functional study examples:
+
 =head2 PasswordMonkey::Filler::Sudo
 
 Sudo passwords
 
 Running a command like
 
-    $ sudo adduser testuser
+    $ sudo ls
     [sudo] password for mschilli: 
     ********
 
-=head2 PasswordMonkey::Filler::Passwd
+=head2 PasswordMonkey::Filler::Password
 
-The passwd Program
+Responds to any "password:" prompts:
 
+    $ adduser wonko
     Copying files from `/etc/skel' ...
     Enter new UNIX password: 
     ********
     Retype new UNIX password: 
     ********
 
-=head2 PasswordMonkey::Filler::SSH
-
-    $ ssh localhost
-    testuser@localhost's password: 
-    ********
-
 =head1 Bouncer Plugins
+
+You might be wondering: "What if I use a simple password filler responding
+to 'password:' prompts and the mysql client prints 'password: no' as part
+of its diagnostic output?" 
+
+With previous versions of PasswordMonkey you were in big trouble, because
+it would then send the password to an unsilenced terminal, which echoed
+the password, which ending up on screen or in log files of automated
+processes. Big trouble! For this reason, PasswordMonkey 0.09 and up will 
+silence the terminal the password gets sent to proactively as a precaution.
+
+TODO
+But 
 
 Bouncer plugins can configure a number of security checks to run after
 a prompt has been detected. These checks are also implemented as
