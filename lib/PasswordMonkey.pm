@@ -362,7 +362,7 @@ The $monkey->go() method call returns a true value upon success, so running
 
 will catch any errors.
 
-=item C<is_success()
+=item C<is_success()>
 
 After go() has returned,
 

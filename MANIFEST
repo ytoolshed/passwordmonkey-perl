@@ -2,8 +2,10 @@
 Changes
 lib/PasswordMonkey.pm
 lib/PasswordMonkey/Bouncer.pm
+lib/PasswordMonkey/Bouncer/Retry.pm
 lib/PasswordMonkey/Bouncer/Wait.pm
 lib/PasswordMonkey/Filler.pm
+lib/PasswordMonkey/Filler/Password.pm
 lib/PasswordMonkey/Filler/Sudo.pm
 Makefile.PL
 MANIFEST
@@ -18,6 +20,8 @@ t/006CustomFiller.t
 t/007Dealbreaker.t
 t/008Coderef.t
 t/009ExitCode.t
+t/010PasswordFiller.t
+t/011RetryBouncer.t
 t/eg/adduser-simulator
 t/eg/ex0
 t/eg/ex69
