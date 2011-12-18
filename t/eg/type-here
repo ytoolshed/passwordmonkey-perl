@@ -9,9 +9,9 @@ $|=1;
 print "$0\n";
 
 my $user = scalar getpwuid $>;
-print "type here:";
 
 ReadMode 2;
+print "type here:";
 my $pw1 = <STDIN>;
 ReadMode 1;
 

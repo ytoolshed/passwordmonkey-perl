@@ -71,9 +71,10 @@ sub fill {
       # driven program isn't collecting at all), check first and if 
       # echo is on, turn it off on the pty slave manually.
     my $stty_settings = $exp->slave->stty("-a");
+    DEBUG "stty_settings are $stty_settings";
 
     my $echo_is_on = 1;
-    if( $stty_settings =~ /\b-echo\b/ ) {
+    if( $stty_settings =~ /-echo\b/ ) {
         $echo_is_on = 0;
     }
 
@@ -83,6 +84,7 @@ sub fill {
         $exp->slave->stty(qw(-echo));
     }
 
+    DEBUG "Sending password over to slave pty";
     $exp->send( $password, "\n" );
 
 

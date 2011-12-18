@@ -1,7 +1,6 @@
 ######################################################################
 Revision history for Perl extension PasswordMonkey
 
-TODO: Add Bouncer::NoEcho and Bouncer::Retry implementations
 TODO: Document dealbreaker
 
 0.09  2011/12/17
@@ -11,6 +10,7 @@ TODO: Document dealbreaker
          forgot to turn echoing off.
     (ms) PasswordMonkey::Filler::Password plugin and tests
     (ms) Bouncer error now gets reported as LOGWARN
+    (ms) PasswordMonkey::Bouncer::Retry plugin and tests
 
 0.08  2011/08/17
     (ms) Added missing Term::ReadKey for testsuite

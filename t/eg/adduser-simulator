@@ -8,15 +8,15 @@ use Term::ReadKey;
 $|=1;
 print "$0\n";
 print "Copying files from `/etc/skel' ...\n";
-print "Enter new UNIX password: ";
 
 ReadMode 2;
+print "Enter new UNIX password: ";
 my $pw1 = <>;
 ReadMode 1;
 
-print "\nRetype new UNIX password: ";
 
 ReadMode 2;
+print "\nRetype new UNIX password: ";
 my $pw2 = <>;
 ReadMode 1;
 

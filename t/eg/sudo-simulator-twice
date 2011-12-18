@@ -11,11 +11,12 @@ print "$0\n";
 for(1..2) {
 
     my $user = "womper";
-    print "[sudo] password for $user:";
-    
+
     ReadMode 2;
+    print "[sudo] password for $user:";
     my $pw1 = <STDIN>;
     ReadMode 1;
     
-    print "Got it ($_).\n";
+    print "Got it ($_) [$pw1].\n";
+    sleep 1;
 }
