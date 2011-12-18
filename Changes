@@ -1,8 +1,6 @@
 ######################################################################
 Revision history for Perl extension PasswordMonkey
 
-TODO: Document dealbreaker
-
 0.09  2011/12/17
     (ms) Lots of better documentation
     (ms) Calling -noecho right before submitting the password to make
